@@ -51,7 +51,7 @@ def handle_dialog(res, req):
         }
         return
 
-    if req['request']['original_utterance'].lower() == '':
+    if req['request']['original_utterance'].lower() == 'помощь':
         res['response']['text'] = 'Отправь название города, ' \
                                   'и я отправлю фото, если знаю его'
     elif sessionStorage[user_id]['first_name'] is None:

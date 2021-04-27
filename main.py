@@ -51,8 +51,11 @@ def handle_dialog(res, req):
         }
         return
 
-    # пользователь еще не представился.
-    if sessionStorage[user_id]['first_name'] is None:
+    if req['request']['original_utterance'].lower() == '':
+        res['response']['text'] = 'Отправь название города, ' \
+                                  'и я отправлю фото, если знаю его'
+    elif sessionStorage[user_id]['first_name'] is None:
+        # пользователь еще не представился.
         # в последнем его сообщение ищем имя.
         first_name = get_first_name(req)
         # если не нашли, то сообщаем пользователю что не расслышали.
@@ -74,6 +77,10 @@ def handle_dialog(res, req):
                     'hide': True
                 } for city in cities
             ]
+            res['response']['buttons'] += {
+                'title': 'Помощь',
+                'hide': True
+            }
     else:
         # ищем город в сообщение от пользователя
         city = get_city(req)

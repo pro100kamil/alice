@@ -77,10 +77,10 @@ def handle_dialog(res, req):
                     'hide': True
                 } for city in cities
             ]
-            res['response']['buttons'] += {
+            res['response']['buttons'] += [{
                 'title': 'Помощь',
                 'hide': True
-            }
+            }]
     else:
         # ищем город в сообщение от пользователя
         city = get_city(req)
